@@ -42,7 +42,7 @@ class RegistroController extends AbstractController
             $entityManager->flush();
 
             // Correo electrónico alumno
-            $message = (new \Swift_Message('PCCM Virtual - Registro'))
+            $message = (new \Swift_Message('Días de puertas abiertas del posgrado en Matemáticas de Morelia - Registro'))
                 ->setFrom('webmaster@matmor.unam.mx')
                 ->setTo(array($registro->getCorreo() ))
 //            ->setTo('gerardo@matmor.unam.mx')

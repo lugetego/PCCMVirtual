@@ -5,17 +5,14 @@ Gracias. Hemos recibido tu registro al {{ evento }}
 Nombre: {{ registro.nombre|title }} {{ registro.apellidos|title }}
 Correo: {{ registro.correo }}
 
-
 {% if registro.estudiante == true and (registro.grado == 'Maestria' or registro.grado == 'Licenciatura' or registro.grado == 'Especialidad') %}
-
-Mensaje para estudiante {{ registro.grado }}
-
+Has concluido satisfactoriamente tu registro. Posteriormente te enviaremos instrucciones para la conexión al evento.
 {% else %}
+Has concluido satisfactoriamente tu solicitud de registro.
 
-Mensaje para no estudiante y grado {{ registro.grado }}
+Lamentablemente tenemos cupo limitado y daremos preferencia a estudiantes de licenciatura y maestría. Una semana antes del evento te confirmaremos si tu solicitud es aceptada, y se te avisará por correo electrónico.
 
 {% endif %}
-
 
 ¡Saludos cordiales!
 

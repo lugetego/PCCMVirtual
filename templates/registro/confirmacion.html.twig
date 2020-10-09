@@ -6,17 +6,19 @@
     </div>
 
     <div class="alert alert-success">
-        <strong> <i class="fa fa-check-circle" aria-hidden="true"></i> !Tus datos se registraron exitosamente!</strong>
+        <strong> <i class="fa fa-check-circle" aria-hidden="true"></i> !Has concluido satisfactoriamente tu registro!,
+            recibirás un correo de confirmación.
+        </strong>
     </div>
-    <p class="lead mt-5"><i class="fa fa-envelope" aria-hidden="true"></i> Recibirás un correo de confirmación.</p>
 
     {% if registro.estudiante == true and (registro.grado == 'Maestría' or registro.grado == 'Licenciatura' or registro.grado == 'Especialidad') %}
-
-        <p class="lead mt-5"><i class="fa fa-warning" aria-hidden="true"></i> Mensaje para estudiante {{ registro.grado }}</p>
-
+        <p class="lead mt-5"><i class="fa fa-warning" aria-hidden="true"></i>
+           Posteriormente te enviaremos instrucciones para la conexión al evento.
+        </p>
     {% else %}
-        <p class="lead mt-5"><i class="fa fa-warning" aria-hidden="true"></i> Mensaje para no estudiante o
-            un estudiante de {{ registro.grado }}</p>
+        <p class="lead mt-5"><i class="fa fa-warning" aria-hidden="true"></i>
+            Lamentablemente tenemos cupo limitado y daremos preferencia a estudiantes de licenciatura y maestría. Una semana antes del evento te confirmaremos si tu solicitud es aceptada, y se te avisará por correo electrónico.
+        </p>
     {% endif %}
 
     <a class="btn btn-primary" href="http://pccm.umich.unam.mx/" role="button">
