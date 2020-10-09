@@ -1,0 +1,172 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.16/b-1.5.1/datatables.min.css"/>
+{% endblock %}
+
+{% block title %}Registros{% endblock %}
+
+
+{% block body %}
+    <h4 class="my-4 text-secondary">{{ registros|length }} solicitudes</h4>
+
+    {% set evaluados, aceptados, confirmados, estudiantes, nestudiantes, elicenciatura, emaestria, eespecialidad, edoctorado,
+        nelicenciatura, nemaestria, neespecialidad, nedoctorado= 0,0,0,0,0,0,0,0,0,0,0,0,0 %}
+    {% for registro in registros %}
+        {% if registro.aceptado != null or registro.confirmado != null or registro.comentarios != null %}
+            {% set evaluados = evaluados + 1  %}
+        {%  endif%}
+        {% if registro.aceptado == true  %}
+            {% set aceptados = aceptados + 1  %}
+        {%  endif%}
+        {% if registro.confirmado == true  %}
+            {% set confirmados = confirmados + 1  %}
+        {%  endif%}
+        {% if registro.estudiante == true  %}
+            {% set estudiantes = estudiantes + 1  %}
+        {%  endif%}
+        {% if registro.estudiante == false  %}
+            {% set nestudiantes = nestudiantes + 1  %}
+        {%  endif%}
+        {% if registro.estudiante == true and registro.grado == 'Licenciatura'  %}
+            {% set elicenciatura = elicenciatura + 1  %}
+        {%  endif%}
+        {% if registro.estudiante == true and registro.grado == 'Maestría'  %}
+            {% set emaestria = emaestria + 1  %}
+        {%  endif%}
+        {% if registro.estudiante == true and registro.grado == 'Especialidad'  %}
+            {% set eespecialidad = eespacialidad + 1  %}
+        {%  endif%}
+        {% if registro.estudiante == true and registro.grado == 'Doctorado'  %}
+            {% set edoctorado = edoctorado + 1  %}
+        {%  endif%}
+        {% if registro.estudiante == false and registro.grado == 'Licenciatura'  %}
+            {% set nelicenciatura = nelicenciatura + 1  %}
+        {%  endif%}
+        {% if registro.estudiante == false and registro.grado == 'Maestría'  %}
+            {% set nemaestria = nemaestria + 1  %}
+        {%  endif%}
+        {% if registro.estudiante == false and registro.grado == 'Especialidad'  %}
+            {% set neespecialidad = neespacialidad + 1  %}
+        {%  endif%}
+        {% if registro.estudiante == false and registro.grado == 'Doctorado'  %}
+            {% set nedoctorado = nedoctorado + 1  %}
+        {%  endif%}
+    {% endfor %}
+
+
+    <div class="row">
+        <div class="col-3">
+            <ul>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Estudiantes
+                    <span class="badge badge-primary badge-pill">{{ estudiantes }}</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between">
+                    L
+                    <span class="badge badge-primary badge-pill"> {{ elicenciatura }}</span>
+                    M
+                    <span class="badge badge-primary badge-pill">{{ emaestria }}</span>
+                    D
+                    <span class="badge badge-primary badge-pill"> {{ elicenciatura }}</span>
+                    E
+                    <span class="badge badge-primary badge-pill"> {{ eespecialidad }}</span>
+                </li>
+
+            </ul>
+        </div>
+        <div class="col-3">
+            <ul>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    No estudiantes
+                    <span class="badge badge-primary badge-pill">{{ nestudiantes }}</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between">
+                    L
+                    <span class="badge badge-primary badge-pill"> {{ nelicenciatura }}</span>
+                    M
+                    <span class="badge badge-primary badge-pill">{{ nemaestria }}</span>
+                    D
+                    <span class="badge badge-primary badge-pill"> {{ nedoctorado }}</span>
+                    E
+                    <span class="badge badge-primary badge-pill"> {{ neespecialidad }}</span>
+                </li>
+            </ul>
+        </div>
+        <div class="col-3">
+            <ul>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Aceptados
+                    <span class="badge badge-primary badge-pill">{{ aceptados }}</span>
+                </li>
+            </ul>
+        </div>
+        <div class="col-3">
+            <ul>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Confirmados
+                    <span class="badge badge-primary badge-pill">{{ confirmados }}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <table id="registry" class="table table-sm table-striped table-bordered table-hover" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>Nacionalidad</th>
+                <th>Correo</th>
+                <th>Residencia</th>
+                <th >Estudiante</th>
+                <th>Grado</th>
+                <th>Programa</th>
+                <th>Institucion</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for registro in registros %}
+            <tr>
+                <td><a href="{{ path('registro_show', {'slug': registro.slug}) }}">{{ registro.slug }}</a></td>
+                <td>{{ registro.nombre }}</td>
+                <td>{{ registro.apellidos }}</td>
+                <td>{{ registro.nacionalidad }}</td>
+                <td>{{ registro.correo }}</td>
+                <td>{{ registro.residencia }}</td>
+                <td class="text-center">{{ registro.estudiante ? 'Si' : 'No' }}</td>
+                <td>{{ registro.grado }}</td>
+                <td>{{ registro.programa }}</td>
+                <td>{{ registro.institucion }}</td>
+                <td>
+                    <a href="{{ path('registro_show', {'slug': registro.slug}) }}"><i class="fa fa-search-plus" aria-hidden="true"></i>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.16/b-1.5.1/b-html5-1.5.1/datatables.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#registry').DataTable({
+                pageLength: 15,
+            } );
+        } );
+    </script>
+{% endblock %}

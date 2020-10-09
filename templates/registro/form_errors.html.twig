@@ -1,0 +1,19 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">{{ evento }} - Formulario de registro</a>
+    </div>
+</nav>
+
+{% block form_errors %}
+    <div class="container">
+        {% apply spaceless %}
+            {% if errors|length > 0 %}
+                <ul>
+                    {% for error in errors %}
+                        <p class="text-danger"><i class="fa fa-times"></i> {{ error.message }}</p>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endapply %}
+    </div>
+{% endblock form_errors %}

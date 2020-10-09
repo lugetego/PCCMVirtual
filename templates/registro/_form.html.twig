@@ -1,0 +1,78 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">{{ evento }} - Formulario de registro</a>
+    </div>
+</nav>
+
+<div class="mt-2 alert alert-secondary" role="alert">
+    <p><strong><i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+            Importante</strong></p>
+    <ul>
+        <li>Asegúrate de escribir correctamente tu correo electrónico ya que te enviaremos
+            un correo que te confirmará que hemos recibido tu registro.</li>
+        <li>En caso de que no recibas el correo de confirmación debes escribir al correo
+            <strong>webmaster<i class="fa fa-at"></i>matmor.unam.mx</strong> para verificar que hayamos recibido tu información.</li>
+    </ul>
+</div>
+
+{{ form_start(form) }}
+
+<h4 class="text-secondary border-bottom my-4 pb-2">Información personal</h4>
+<div class="row">
+    <div class="form-group col-md-4 col-sm-12">
+        <label for="inputNombres">Nombre(s)</label>
+        {{ form_widget(form.nombre, {'attr': {'class': 'form-control', 'placeholder':'Nombre(s)'}}) }}
+        {{ form_errors(form.nombre) }}
+    </div>
+    <div class="form-group col-md-4 col-sm-12">
+        <label for="inputPaterno">Apellido(s)</label>
+        {{ form_widget(form.apellidos, {'attr': {'class': 'form-control', 'placeholder':'Apeliido(s)'}}) }}
+        {{ form_errors(form.apellidos) }}
+    </div>
+    <div class="form-group col-md-4 col-sm-12">
+        {{ form_label(form.correo) }}
+        {{ form_widget(form.correo, {'attr': {'class': 'form-control', 'placeholder':'Dirección de correo'}}) }}
+        {{ form_errors(form.correo) }}
+    </div>
+    <div class="form-group col-md-4 col-sm-12">
+        {{ form_label(form.nacionalidad) }}
+        {{ form_widget(form.nacionalidad, {'attr': {'class': 'form-control', 'placeholder':'Dirección de correo'}}) }}
+        {{ form_errors(form.nacionalidad) }}
+    </div>
+
+    <div class="form-group col-md-4 col-sm-12">
+        <label for="inputPais">Lugar de residencia</label>
+        {{ form_widget(form.residencia, {'attr': {'class': 'form-control', 'placeholder':'Lugar de residencia'}}) }}
+        {{ form_errors(form.residencia) }}
+    </div>
+</div>
+
+<h4 class="text-secondary border-bottom my-4 pb-2">Información académica</h4>
+<div class="row">
+
+    <div class="form-group col-md-4 col-sm-12">
+        <label for="inputPorcentaje">¿Eres estudiante?</label>
+        {{ form_widget(form.estudiante, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.estudiante) }}
+    </div>
+    <div class="form-group col-md-6 col-sm-12">
+        <label for="inputPorcentaje">Último grado académico terminado (anterior a licenciatura)</label>
+        {{ form_widget(form.grado, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.grado) }}
+    </div>
+    <div class="form-group col-md-4 col-sm-12">
+        <label for="inputPorcentaje">Programa</label>
+        {{ form_widget(form.programa, {'attr': {'class': 'form-control', 'placeholder':'Programa'}}) }}
+        {{ form_errors(form.programa) }}
+    </div>
+    <div class="form-group col-md-6 col-sm-12">
+        <label for="inputInstitucion">Institución de procedencia</label>
+        {{ form_widget(form.institucion, {'attr': {'class': 'form-control', 'placeholder':'Institución de procedencia'}}) }}
+        {{ form_errors(form.institucion) }}
+    </div>
+</div>
+
+
+{{ form_widget(form) }}
+<button class="btn btn-primary">{{ button_label|default('Enviar') }}</button>
+{{ form_end(form) }}

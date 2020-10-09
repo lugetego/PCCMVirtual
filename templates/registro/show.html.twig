@@ -1,0 +1,114 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Registro{% endblock %}
+
+{% block body %}
+
+    <div class="mt-5">
+        <nav aria-label="breadcrumb ">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ path('registro_index') }}">Todos los registros</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ registro.slug }}</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-4">
+                            <h4 class="card-title"><i class="fa fa-user-o" aria-hidden="true"></i>
+                                {{ registro.nombre }} {{ registro.apellidos }}</h4>
+                            <p class="card-text">
+                                {{ registro.correo }}<br>
+                                <strong>Nacionalidad:</strong> {{ registro.nacionalidad }}<br>
+                                <strong>Residencia:</strong> {{ registro.residencia }}<br>
+                                <strong>Estudiante:</strong> {{ registro.estudiante? 'Si' : 'No' }}, {{ registro.grado }}<br>
+                                {{ registro.institucion }}, {{ registro.programa }}<br>
+                            </p>
+                            <small><em>Creado: {{ registro.createdAt|date }}</em></small>
+
+                        </div>
+                        <div class="col-8">
+                            <h5 class="card-title">Evaluación de solicitud</h5>
+                            <div class="row">
+                                <div class="col-3">
+                                    {% if registro.aceptado == true %}
+                                        <p class="text-success">
+                                            <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                            Aceptado
+                                        </p>
+                                    {% elseif  registro.aceptado is null %}
+                                        <p class="text-secondary">
+                                            <i class="fa fa-question-circle" aria-hidden="true"></i>
+                                            Aún no ha sido aceptado
+                                        </p>
+                                    {% elseif registro.aceptado == 0 %}
+                                        <p class="text-danger">
+                                            <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                            No aceptado
+                                        </p>
+                                    {% endif %}
+                                </div>
+                                <div class="col-3">
+                                    {% if registro.confirmado == true %}
+                                        <p class="text-success">
+                                            <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                            Confirmado
+                                        </p>
+                                    {% elseif  registro.confirmado is null %}
+                                        <p class="text-secondary">
+                                            <i class="fa fa-question-circle" aria-hidden="true"></i>
+                                            Aún no ha sido confirmado
+                                        </p>
+                                    {% elseif registro.confirmado == 0 %}
+                                        <p class="text-danger">
+                                            <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                            No confirmado
+                                        </p>
+                                    {% endif %}
+                                </div>
+                                <div class="col-6">
+                                    <p class="card-text text-justify">
+                                        <em>{{ registro.comentarios }}</em>
+                                    </p>
+                                </div>
+                            </div>
+                            <small><em>Modificado: {{ registro.modifiedAt|date }}</em></small>
+
+
+                        </div>
+                    </div>
+
+
+                    <button type="button" class="btn btn-primary btn-xs pull-right" data-toggle="modal" data-target="#evalModal">
+                        <i class="fa fa-check"></i> Evaluar </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="evalModal" tabindex="-1" role="dialog" aria-labelledby="evalModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    {{ registro.slug }}
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body py-3">
+
+                    {{ render(controller(
+                    'App\\Controller\\RegistroController::eval',
+                    { 'slug': registro.slug }
+                    )) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

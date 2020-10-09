@@ -1,0 +1,23 @@
+{{ evento }}
+
+Gracias. Hemos recibido tu registro a la {{ evento }}
+
+Nombre: {{ registro.nombre|title }} {{ registro.apellidos|title }}
+Correo: {{ registro.correo }}
+
+
+{% if registro.estudiante == true and (registro.grado == 'Maestria' or registro.grado == 'Licenciatura' or registro.grado == 'Especialidad') %}
+
+Mensaje para estudiante {{ registro.grado }}
+
+{% else %}
+
+Mensaje para no estudiante y grado {{ registro.grado }}
+
+{% endif %}
+
+
+¡Saludos cordiales!
+
+{{ evento }}
+Comité organizador.
