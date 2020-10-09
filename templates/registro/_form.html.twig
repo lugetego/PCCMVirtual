@@ -36,7 +36,7 @@
     </div>
     <div class="form-group col-md-4 col-sm-12">
         {{ form_label(form.nacionalidad) }}
-        {{ form_widget(form.nacionalidad, {'attr': {'class': 'form-control', 'placeholder':'Dirección de correo'}}) }}
+        {{ form_widget(form.nacionalidad, {'attr': {'class': 'form-control', 'placeholder':'Nacionalidad'}}) }}
         {{ form_errors(form.nacionalidad) }}
     </div>
 
@@ -50,16 +50,17 @@
 <h4 class="text-secondary border-bottom my-4 pb-2">Información académica</h4>
 <div class="row">
 
-    <div class="form-group col-md-4 col-sm-12">
+    <div class="form-group col-md-2 col-sm-12">
         <label for="inputPorcentaje">¿Eres estudiante?</label>
         {{ form_widget(form.estudiante, {'attr': {'class': 'form-control'}}) }}
         {{ form_errors(form.estudiante) }}
     </div>
-    <div class="form-group col-md-6 col-sm-12">
-        <label for="inputPorcentaje">Último grado académico terminado (anterior a licenciatura)</label>
+    <div class="form-group col-md-10 col-sm-12">
+        <label for="inputPorcentaje">En caso de ser estudiante selecciona el grado que cursas, en caso de que no, selecciona tu último grado concluido</label>
         {{ form_widget(form.grado, {'attr': {'class': 'form-control'}}) }}
         {{ form_errors(form.grado) }}
     </div>
+
     <div class="form-group col-md-4 col-sm-12">
         <label for="inputPorcentaje">Programa</label>
         {{ form_widget(form.programa, {'attr': {'class': 'form-control', 'placeholder':'Programa'}}) }}

@@ -5,4 +5,4 @@ twig:
     exception_controller: null
 
     globals:
-            evento: PCCM Virtual
+            evento: Dias de puertas abiertas del posgrado en Matemáticas de Morelia
