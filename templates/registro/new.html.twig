@@ -4,8 +4,19 @@
 {% block title %}Registro{% endblock %}
 {% block body %}
     <div class="container">
+        <div class="hero-image">
+            <div class="container">
+                <div class="hero-text text-left">
+                    <div class="mb-4">
+                        <img class="logo-emalca" src="{{ asset("img/logopccmvirtual.png") }}" width="500px">
+                    </div>
+                    <h2>Formulario de registro</h2>
+                </div>
+            </div>
+        </div>
+
         {{ include('registro/_form.html.twig') }}
     </div>
-{% endblock %}
+    {% endblock %}
 
 
